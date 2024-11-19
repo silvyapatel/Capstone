@@ -5,6 +5,7 @@ import Login from './Components/Auth/Login';
 import Register from './Components/Auth/Register';
 import HomePage from './Pages/HomePage';
 import { AuthProvider } from './Context/AuthContext';
+import AccountPage from './Pages/AccountPage';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="accounts" element={<AccountPage/>}/>
         </Routes>
       </Router>
     </AuthProvider>

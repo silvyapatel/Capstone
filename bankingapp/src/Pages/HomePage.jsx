@@ -19,6 +19,7 @@ const HomePage = () => {
   return (
     <div>
       <h2>Welcome to the Home Page</h2>
+      <button onClick={() => navigate('/accounts')}>Go to Accounts</button>
       {/* Your home page content */}
     </div>
   );
