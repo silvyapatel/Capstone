@@ -41,7 +41,7 @@ function Register() {
         setMessage('Registered successfully! Please Login to proceed.');
         setFormData({ username: '', email: '', password: '' });
         setTimeout(() => {
-            navigate('/acc-setup'); // Redirect to login page
+            navigate('/login'); // Redirect to login page
           }, 2000); // Reset form after success
       } else {
         setError(result.message || 'Registration failed. Please try again.');

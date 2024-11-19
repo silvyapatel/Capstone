@@ -18,7 +18,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public CustomUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.example.capstone.capstonebackend.Model.User user = userRepository.findByUsername(username);
+        com.example.capstone.capstonebackend.Model.User user = userRepository.findByEmail(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);

@@ -7,6 +7,8 @@ import Transactions from './Pages/Transactions';
 import Loans from './Pages/Loans';
 import Navbar from './Components/Navbar';
 import ProtectedRoute from './Services/ProtectedRoute';
+import AccountSetup from './Components/AccountSetup';
+import Home from './Pages/Home';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('jwtToken') || null);
@@ -46,10 +48,11 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           {/* Protected routes */}
-          {/* <Route
-            path="/dashboard"
-            element={<ProtectedRoute token={token} redirectTo="/login" component={<Dashboard logout={logout} />} />}
-          /> */}
+          <Route
+            path="/accountsetup"
+             element={<AccountSetup logout={logout}/>}
+          />
+          
           <Route
             path="/transactions"
             element={<ProtectedRoute token={token} redirectTo="/login" component={<Transactions />} />}

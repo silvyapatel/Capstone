@@ -31,6 +31,7 @@ public class JwtUtil {
         return extractClaims(token).getSubject();  // Extract subject (username) from token claims
     }
 
+
     // Extract the expiration date from the JWT token
     public Date extractExpiration(String token) {
         return extractClaims(token).getExpiration(); // Get expiration from claims

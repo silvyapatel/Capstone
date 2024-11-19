@@ -13,6 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -33,10 +37,12 @@ public class SecurityConfig {
     // Security filter chain configuration
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()  // Disable CSRF (common for stateless APIs)
-                .authorizeRequests()
+        http.csrf().disable()
+                .cors()
+                .and()// Disable CSRF (common for stateless APIs)
+                .authorizeHttpRequests()
                 // Use requestMatchers instead of antMatchers (Spring Security 6+)
-                .requestMatchers("/auth/register", "/auth/login").permitAll()  // Allow register and login without authentication
+                .requestMatchers("/auth/register", "/auth/login","/accounts/** ").permitAll()  // Allow register and login without authentication
                 .anyRequest().authenticated()  // All other requests need authentication
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);  // Add JWT filter before Spring Security filter
@@ -54,6 +60,20 @@ public class SecurityConfig {
         authenticationManagerBuilder.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder());
 
         return authenticationManagerBuilder.build();
+    }
+    @Bean
+    public UrlBasedCorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+
+        // Allow requests from your frontend URL (localhost:3000)
+        config.setAllowedOrigins(Arrays.asList("http://localhost:3000"));  // Allow frontend to access the backend
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));  // Allow specific HTTP methods
+        config.setAllowedHeaders(Arrays.asList("*"));  // Allow all headers
+        config.setAllowCredentials(true);  // Allow sending credentials (like JWT)
+
+        source.registerCorsConfiguration("/**", config);  // Apply the CORS configuration globally
+        return source;
     }
 
 }
