@@ -4,11 +4,10 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import Dashboard from './Pages/Dashboard';
 import Transactions from './Pages/Transactions';
-import Loans from './Pages/Loans';
 import Navbar from './Components/Navbar';
 import ProtectedRoute from './Services/ProtectedRoute';
 import AccountForm from './Components/AccountForm';
-import Home from './Pages/Home';
+import EmiCalculator from './Components/EMICalculator';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('jwtToken') || null);
@@ -59,7 +58,7 @@ function App() {
           />
           <Route
             path="/loans"
-            element={<ProtectedRoute token={token} redirectTo="/login" component={<Loans />} />}
+            element={<ProtectedRoute token={token} redirectTo="/login" component={<EmiCalculator />} />}
           />
         </Routes>
       </div>

@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .and()// Disable CSRF (common for stateless APIs)
                 .authorizeHttpRequests()
                 // Use requestMatchers instead of antMatchers (Spring Security 6+)
-                .requestMatchers("/auth/register", "/auth/login","/accounts/** ").permitAll()  // Allow register and login without authentication
+                .requestMatchers("/auth/register", "/auth/login","/accounts/**").permitAll()  // Allow register and login without authentication
                 .anyRequest().authenticated()  // All other requests need authentication
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);  // Add JWT filter before Spring Security filter
