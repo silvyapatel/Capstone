@@ -172,7 +172,7 @@ const styles = {
     color: '#333',
     fontSize: '18px',
     padding: '20px',
-    backgroundColor: '#f0f8ff',
+    backgroundColor: '#Aec6cf',
     borderRadius: '8px',
   },
   title: {
